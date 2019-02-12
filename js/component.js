@@ -11,14 +11,13 @@ function showDate(){
 	if(firstday > 0){
 		//添加空格
 		subSpace(firstday-1);
+		subDate(maxday);
 	}
 	else if(firstday == 0){
 		//不作处理
+		subDate(maxday);
 	}
 
-	for(var i=1;i<=maxday;i++){
-		//填充日历
-	}
 }
 
 function prevDate(clicksign){
@@ -39,13 +38,11 @@ function prevDate(clicksign){
 	if(firstday > 0){
 		//添加空格
 		subSpace(firstday-1);
+		subDate(maxday);
 	}
 	else if(firstday == 0){
 		//不作处理
-	}
-
-	for(var i=1;i<=maxday;i++){
-		//填充日历
+		subDate(maxday);
 	}
 }
 
@@ -67,16 +64,30 @@ function nextDate(clicksign){
 	if(firstday > 0){
 		//添加空格
 		subSpace(firstday-1);
+		subDate(maxday);
 	}
 	else if(firstday == 0){
 		//不作处理
-	}
-
-	for(var i=1;i<=maxday;i++){
-		//填充日历
+		subDate(maxday);
 	}
 }
 
 function subSpace(spacenum){
-	//pass
+	for(var i=0;i<spacenum;i++){
+		
+	}
+}//添加空格
+
+function subDate(maxday){
+	for(var i=0;i<maxday;i++){
+
+	}
+}//添加日期
+
+export {
+	showDate,
+	prevDate,
+	nextDate,
+	subSpace,
+	subDate
 }

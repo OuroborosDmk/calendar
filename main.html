@@ -2,39 +2,30 @@
 <html>
 <head>
 	<title>calendar</title>
-	<link rel="stylesheet" href="component.css">
-	<script src="vue.js"></script>
-	<script src="component.js"></script>
+	<meta charset="utf-8"/>
+	<script src="./js/vue.js"></script>
 </head>
 <body>
-	<div id="test">
-		<calendar :date = "date" :max_date = "max_date" :min_date = "min_date">
-			<template id="table">
-				<div>
-					<div id="tablehead"></div>
-					<div id=""></div>
-				</div>
-			</template>
-		</calendar>
+	<header>
+		<nav>
+			<a href="#">注册/登录</a>
+			<a href="#">日历</a>
+			<a href="#"></a>
+		</nav>
+	</header>
+	<div id="calendarBox">
+		<calender></calender>
 	</div>
-	<script>
-		var calendar = {
-			template: '#table',
-			data: function(){
-				return{
-					date: '2019-1-28',
-					min_date: '1990-1-1',
-					max_date: '2029-12-31',
-				};
-			},
-			methods: {
+	<script type="module">
+		import Calendar from './components/calendar.vue';
 
-			},
-		};
+		Vue.use(Calendar);
+		Vue.component('calender',Calendar);
+
 		new Vue({
-			el: '#test',
+			el:'#calendarBox',
 			components: {
-				'calendar':calendar
+    			Calendar
 			},
 		});
 	</script>
