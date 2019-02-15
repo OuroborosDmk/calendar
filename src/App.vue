@@ -4,7 +4,8 @@
     <nav>
       <a href="#">注册/登录</a>
       <a href="#">日历</a>
-      <a href="#"></a>
+      <a href="#">博客</a>
+      <a href="#">个人中心</a>
     </nav>
   </header>
   <calendar></calendar>

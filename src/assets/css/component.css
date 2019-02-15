@@ -5,8 +5,105 @@
 	padding: 0;
 	border: 0;
 }
-ul{
-	border:1px solid black;
-	width:200px;
-	height:100px;
+a{
+	text-decoration:none;
 }
+ul,li{
+	list-style:none;
+}
+
+/*日历本体*/
+#calendar{
+	/*height:auto!important;
+	min-height:650px;*/
+	height:650px;
+	width:100%;
+	margin-top:50px;
+	border-bottom:2px solid black;
+	border-top:2px solid black;
+}
+#calendarbox{
+	width:60%;
+	height:100%;
+	float:left;
+	border-right:2px solid black;
+}
+#blackboard{
+	width:40%;
+	height:100%;
+	float:left;
+}
+.clearfloat{
+	clear:both;
+}
+
+/*日历头部*/
+#calendarboxHeader{
+	width:100%;
+	height:50px;
+	border-bottom:1px solid black;
+}
+#calendarboxHeader a:nth-child(1){
+	display:block;
+	width:4%;
+	height:50px;
+	float:left;
+	line-height:40px;
+	font-size:50px;
+}
+#calendarboxHeader p{
+	width:92%;
+	height:50px;
+	float:left;
+	text-align:center;
+	line-height:50px;
+	font-size:20px;
+}
+#calendarboxHeader a:nth-child(3){
+	display:block;
+	width:4%;
+	height:50px;
+	float:right;
+	line-height:40px;
+	font-size:50px;
+}
+
+/*日历主部*/
+#weekdayHeader{
+	width:100%;
+	height:50px;
+}
+#weekdayHeader li{
+	width:13%;
+	height:50px;
+	border-right:1px solid black;
+	border-left:1px solid black;
+	float:left;
+}
+#weekdayHeader li:nth-child(1){
+	margin-left:3.5%;
+	border-left:2px solid black;
+}
+#weekdayHeader li:nth-child(7){
+	border-right:2px solid black;
+}
+#weekdayboard{
+	width:100%;
+	height:600px;
+}
+#weekdayboard li{
+	width:13%;
+	height:50px;
+	border-right:1px solid black;
+	border-left:1px solid black;
+	float:left;
+}
+#weekdayboard li:nth-child(1){
+	margin-left:3.5%;
+	border-left:2px solid black;
+}
+#weekdayboard li:nth-child(7){
+	border-right:2px solid black;
+}
+
+/*日历备注*/
