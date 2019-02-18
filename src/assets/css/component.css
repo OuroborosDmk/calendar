@@ -23,7 +23,7 @@ ul,li{
 	border-top:2px solid black;
 }
 #calendarbox{
-	width:60%;
+	width:59%;
 	height:100%;
 	float:left;
 	border-right:2px solid black;
@@ -105,6 +105,7 @@ ul,li{
 	line-height:100px;
 	text-align:center;
 	font-size:30px;
+	cursor:pointer;
 }
 #weekdayboard li:nth-child(7n+1){
 	margin-left:3.5%;
@@ -115,3 +116,27 @@ ul,li{
 }
 
 /*日历备注*/
+#needEdit{
+
+}
+#editArea{
+
+}
+#Edited{
+
+}
+#savebutton{
+	width:50px;
+	height:50px;
+	border:1px solid black;
+}
+#editbutton{
+	width:50px;
+	height:50px;
+	border:1px solid black;
+}
+#deletebutton{
+	width:50px;
+	height:50px;
+	border:1px solid black;
+}

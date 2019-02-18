@@ -10,16 +10,26 @@
                 <li v-for="item in weekList" :key="item.value">{{item.title}}</li>
             </ul>
             <ul id="weekdayboard">
-                <li v-for="item in firstWeek" :key="item.value">{{item.title}}</li>
-                <li v-for="item in secondWeek" :key="item.value">{{item.title}}</li>
-                <li v-for="item in thirdWeek" :key="item.value">{{item.title}}</li>
-                <li v-for="item in forthWeek" :key="item.value">{{item.title}}</li>
-                <li v-for="item in fifthWeek" :key="item.value">{{item.title}}</li>
-                <li v-for="item in sixthWeek" :key="item.value">{{item.title}}</li>
+                <li v-for="item in firstWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
+                <li v-for="item in secondWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
+                <li v-for="item in thirdWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
+                <li v-for="item in forthWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
+                <li v-for="item in fifthWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
+                <li v-for="item in sixthWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
             </ul>
         </div>
         <div id="blackboard">
-
+          <div id="needEdit" v-show="neededitSign">
+            <textarea id="editArea"></textarea>
+            <button @click="saveEdit" id="savebutton"></button>
+          </div>
+          <div id="Edited" v-show="editedSign">
+            <div><p>编辑完成title</p></div>
+            <div><p>20190000</p></div>
+            <div><p>编辑完成test</p></div>
+            <button @click="edit" id="editbutton"></button>
+            <button @click="deleteItem" id="deletebutton"></button>
+          </div>
         </div>
         <div class="clearfloat"></div>
     </div>
@@ -41,6 +51,14 @@ export default {
       day: ' ',
       nextclickSign: 0,
       prevclickSign: 0,
+      editedSign: false,//true为已编辑，false为未编辑
+      neededitSign: true,//true为未编辑，false为已编辑
+      editItem: {
+        id: '',
+        time: '',
+        content: '',
+        title: ''
+      },
       weekList: [
         { title: '日', value: 0 },
         { title: '一', value: 1 },
@@ -103,14 +121,23 @@ export default {
         { title: ' ', value: 39 },
         { title: ' ', value: 40 },
         { title: ' ', value: 41 }
-      ]
+      ],
+
     }
   },
   methods: {
     showCalendar:function(year,month){
+      for(var i=0;i<7;i++){
+        this.firstWeek[i].title=' ';
+        this.secondWeek[i].title=' ';
+        this.thirdWeek[i].title=' ';
+        this.forthWeek[i].title=' ';
+        this.fifthWeek[i].title=' ';
+        this.sixthWeek[i].title=' ';
+      }
       var spaceCount = showDate(year,month);
       this.year = spaceCount[2];
-      this.month = spaceCount[3]+1;
+      this.month = spaceCount[3];
       //console.log(spaceCount[0]);
       //console.log(spaceCount[1]);
       if(spaceCount[0]==0){
@@ -164,6 +191,60 @@ export default {
         this.month=this.month+12;
       }
       this.showCalendar(this.year,this.month);
+    },
+    createId:function(id){
+      var idIndex;
+      var monthIndex;
+      var index;
+      if(id<10){
+        idIndex="0"+String(id);
+      }
+      else{
+        idIndex=String(id);
+      }
+      if(this.month<10){
+        monthIndex="0"+String(this.month);
+      }
+      else{
+        monthIndex=String(this.month);
+      }
+      index=this.year+monthIndex+idIndex;
+
+      return index;
+    },
+    inquireItem:function(id){
+      var index=this.createId(id);
+      //查询数据库
+      console.log(index);
+      var inquireSign=false;//如果数据存在，返回true；如果数据不存在，返回false；
+      if(inquireSign==true){
+        this.editedSign=true;
+        this.neededitSign=false;
+      }
+      else if(inquireSign==false){
+        this.editedSign=false;
+        this.neededitSign=true;
+        this.editItem.id=index;
+      }
+    },
+    addThing:function(content,title){
+      this.editItem.time=this.year+this.month;
+      this.editItem.content=content;
+      this.editItem.title=title;
+      //存入数据库
+      console.log(this.editItem.id+" "+this.editItem.time+" "+title+" "+content);
+    },
+    saveEdit:function(){
+      this.editedSign=true;
+      this.neededitSign=false;
+      this.addThing(1,"200000","test","test");
+    },
+    edit:function(){
+      this.editedSign=false;
+      this.neededitSign=true;
+    },
+    deleteItem:function(){
+
     }
   },
   mounted: function(){
