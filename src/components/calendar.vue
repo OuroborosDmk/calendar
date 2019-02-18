@@ -1,38 +1,38 @@
 <template>
-    <div id="calendar">
-        <div id="calendarbox">
-            <div id="calendarboxHeader">
-                <a href="#" @click="prevmonth">&lt;</a>
-                <p>{{year}}年{{month}}月</p>
-                <a href="#" @click="nextmonth">&gt;</a>
-            </div>
-            <ul id="weekdayHeader">
-                <li v-for="item in weekList" :key="item.value">{{item.title}}</li>
-            </ul>
-            <ul id="weekdayboard">
-                <li v-for="item in firstWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
-                <li v-for="item in secondWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
-                <li v-for="item in thirdWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
-                <li v-for="item in forthWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
-                <li v-for="item in fifthWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
-                <li v-for="item in sixthWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
-            </ul>
-        </div>
-        <div id="blackboard">
-          <div id="needEdit" v-show="neededitSign">
-            <input v-model="theTitle">
-            <textarea id="editArea" v-model="message"></textarea>
-            <button @click="saveEdit" id="savebutton"></button>
-          </div>
-          <div id="Edited" v-show="editedSign">
-            <div><p>{{theTitle}}</p></div>
-            <div><p>{{message}}</p></div>
-            <button @click="edit" id="editbutton"></button>
-            <button @click="deleteItem" id="deletebutton"></button>
-          </div>
-        </div>
-        <div class="clearfloat"></div>
+  <div id="calendar">
+    <div id="calendarbox">
+      <div id="calendarboxHeader">
+        <a href="#" @click="prevmonth">&lt;</a>
+        <p>{{year}}年{{month}}月</p>
+        <a href="#" @click="nextmonth">&gt;</a>
+      </div>
+      <ul id="weekdayHeader">
+        <li v-for="item in weekList" :key="item.value">{{item.title}}</li>
+      </ul>
+      <ul id="weekdayboard">
+        <li v-for="item in firstWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
+        <li v-for="item in secondWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
+        <li v-for="item in thirdWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
+        <li v-for="item in forthWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
+        <li v-for="item in fifthWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
+        <li v-for="item in sixthWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
+      </ul>
     </div>
+    <div id="blackboard">
+      <div id="needEdit" v-show="neededitSign">
+        <input v-model="theTitle">
+        <textarea id="editArea" v-model="message"></textarea>
+        <button @click="saveEdit" id="savebutton">保存</button>
+      </div>
+      <div id="Edited" v-show="editedSign">
+        <div><p>{{theTitle}}</p></div>
+        <div><p>{{message}}</p></div>
+        <button @click="edit" id="editbutton">编辑</button>
+        <button @click="deleteItem" id="deletebutton">删除</button>
+      </div>
+    </div>
+    <div class="clearfloat"></div>
+  </div>
 </template>
 <style>
 @import "../assets/css/component.css";
