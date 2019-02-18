@@ -10,23 +10,23 @@
                 <li v-for="item in weekList" :key="item.value">{{item.title}}</li>
             </ul>
             <ul id="weekdayboard">
-                <li v-for="item in firstWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
-                <li v-for="item in secondWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
-                <li v-for="item in thirdWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
-                <li v-for="item in forthWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
-                <li v-for="item in fifthWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
-                <li v-for="item in sixthWeek" :key="item.value" @click="inquireItem(item.value)">{{item.title}}</li>
+                <li v-for="item in firstWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
+                <li v-for="item in secondWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
+                <li v-for="item in thirdWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
+                <li v-for="item in forthWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
+                <li v-for="item in fifthWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
+                <li v-for="item in sixthWeek" :key="item.value" @click="inquireItem(item.value,item.title)">{{item.title}}</li>
             </ul>
         </div>
         <div id="blackboard">
           <div id="needEdit" v-show="neededitSign">
-            <textarea id="editArea"></textarea>
+            <input v-model="theTitle">
+            <textarea id="editArea" v-model="message"></textarea>
             <button @click="saveEdit" id="savebutton"></button>
           </div>
           <div id="Edited" v-show="editedSign">
-            <div><p>编辑完成title</p></div>
-            <div><p>20190000</p></div>
-            <div><p>编辑完成test</p></div>
+            <div><p>{{theTitle}}</p></div>
+            <div><p>{{message}}</p></div>
             <button @click="edit" id="editbutton"></button>
             <button @click="deleteItem" id="deletebutton"></button>
           </div>
@@ -43,16 +43,18 @@ export default {
   name: 'calendar',
   data () {
     return {
-      trueyear: ' ',
-      truemonth: ' ',
-      trueday: ' ',
-      year: ' ',
-      month: ' ',
-      day: ' ',
+      trueyear: '',
+      truemonth: '',
+      trueday: '',
+      year: '',
+      month: '',
+      day: '',
       nextclickSign: 0,
       prevclickSign: 0,
       editedSign: false,//true为已编辑，false为未编辑
-      neededitSign: true,//true为未编辑，false为已编辑
+      neededitSign: false,//true为未编辑，false为已编辑
+      theTitle: '',
+      message: '',
       editItem: {
         id: '',
         time: '',
@@ -212,39 +214,55 @@ export default {
 
       return index;
     },
-    inquireItem:function(id){
-      var index=this.createId(id);
-      //查询数据库
-      console.log(index);
-      var inquireSign=false;//如果数据存在，返回true；如果数据不存在，返回false；
-      if(inquireSign==true){
-        this.editedSign=true;
-        this.neededitSign=false;
+    inquireItem:function(id,title){
+      if(title===' '){
+        if(id<10){
+          this.prevmonth();
+        }
+        else{
+          this.nextmonth();
+        }
       }
-      else if(inquireSign==false){
-        this.editedSign=false;
-        this.neededitSign=true;
-        this.editItem.id=index;
+      else{
+        var index=this.createId(id);
+        //查询数据库
+        console.log(index);
+        var inquireSign=false;//如果数据存在，返回true；如果数据不存在，返回false；
+        if(inquireSign==true){
+          this.editedSign=true;
+          this.neededitSign=false;
+          this.theTitle=this.editItem.title;//应从数据库中读取数据
+          this.message=this.editItem.content;//应从数据库中读取数据
+        }
+        else if(inquireSign==false){
+          this.editedSign=false;
+          this.neededitSign=true;
+          this.theTitle='';
+          this.message='';
+          this.editItem.id=index;
+        }
       }
     },
-    addThing:function(content,title){
+    addThing:function(){
       this.editItem.time=this.year+this.month;
-      this.editItem.content=content;
-      this.editItem.title=title;
+      this.editItem.content=this.message;
+      this.editItem.title=this.theTitle;
       //存入数据库
-      console.log(this.editItem.id+" "+this.editItem.time+" "+title+" "+content);
+      console.log(this.editItem.id+" "+this.editItem.time+" "+this.editItem.title+" "+this.editItem.content);
     },
     saveEdit:function(){
       this.editedSign=true;
       this.neededitSign=false;
-      this.addThing(1,"200000","test","test");
+      this.addThing();
     },
     edit:function(){
       this.editedSign=false;
       this.neededitSign=true;
     },
     deleteItem:function(){
-
+      //向数据库中传输id，在数据库中删除数据
+      this.editedSign=false;
+      this.neededitSign=false;
     }
   },
   mounted: function(){
