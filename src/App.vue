@@ -2,13 +2,13 @@
 <div id="app">
   <header>
     <nav>
-      <router-link to="/signup"><a>注册/登录</a></router-link>
-      <a href="#">日历</a>
-      <a href="#">博客</a>
-      <a href="#">个人中心</a>
+      <router-link to="/login">登录</router-link>
+      <router-link to="/calendar">日历</router-link>
+      <router-link to="">博客</router-link>
+      <router-link to="">个人中心</router-link>
     </nav>
   </header>
-  <calendar></calendar>
+  <router-view></router-view>
 </div>
 </template>
 
