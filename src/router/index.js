@@ -28,6 +28,11 @@ export default new Router({
       path: '/forgetpw',
       name: 'forgetpw',
       component: forgetpw
+    },
+    {
+      path: '/blog',
+      name: 'blog',
+      component: blog
     }
   ]
 })

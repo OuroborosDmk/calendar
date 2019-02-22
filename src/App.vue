@@ -4,7 +4,7 @@
     <nav>
       <router-link to="/login">登录</router-link>
       <router-link to="/calendar">日历</router-link>
-      <router-link to="">博客</router-link>
+      <router-link to="/blog">博客</router-link>
       <router-link to="">个人中心</router-link>
     </nav>
   </header>
